@@ -32,25 +32,24 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
             if (parts.length == 2) return parts.pop().split(";").shift();
         }
 
-        console.log(getCookie("playerwon"));
+        playerwon = null;
+        playertied = null;
+        playerlost = null;
 
         if (document.cookie.indexOf("playerwon") >= 0) {
-            var pw = new RegExp("playerwon" + "=([^;]+)");
-            var playerwon = pw.exec(document.cookie);
+            playerwon = getCookie("playerwon");
             playerwon = parseInt(playerwon);
             console.log(playerwon);
         }
 
         if (document.cookie.indexOf("playertied") >= 0) {
-            var pt = new RegExp("playertied" + "=([^;]+)");
-            var playertied = pw.exec(document.cookie);
+            playertied = getCookie("playertied");
             playertied = parseInt(playertied);
             console.log(playertied);
         }
 
-        if (document.cookie.indexOf("playertied") >= 0) {
-            var pl = new RegExp("playerlost" + "=([^;]+)");
-            var playerlost = pw.exec(document.cookie);
+        if (document.cookie.indexOf("playerlost") >= 0) {
+            playerlost = getCookie("playerlost");
             playerlost = parseInt(playerlost);
             console.log(playerlost);
         }
