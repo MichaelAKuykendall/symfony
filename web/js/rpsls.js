@@ -16,15 +16,31 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
         while (dif > 2) {
             dif -= 2;
         }
+
+        setTimeout(function () {
+            if (newState == -1) {
+                var i = document.getElementById("choice");
+                i.classList.remove("winner");
+            }
+        }, 5000);
+
         //return choice1 + result[dif] + choice2;
 
         document.getElementById(choice1).style.borderColor = "#FF0000";
         document.getElementById(choice2).style.borderColor = "#FF0000";
 
+        var i = document.getElementById("choice");
+        i.classList.add("winner");
+        setTimeout();
 
         //console.log(choice1 + result[dif] + choice2);
 
         //alert(choice1 + result[dif] + choice2);
+
+        playerwon = null;
+        playertied = null;
+        playerlost = null;
+        totalplays = 0;
 
         function getCookie(name) {
             var value = "; " + document.cookie;
@@ -32,27 +48,29 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
             if (parts.length == 2) return parts.pop().split(";").shift();
         }
 
-        playerwon = null;
-        computerlost = null;
-        playertied = null;
-        playerlost = null;
 
         if (document.cookie.indexOf("playerwon") >= 0) {
             playerwon = getCookie("playerwon");
             playerwon = parseInt(playerwon);
-            console.log(playerwon);
+            console.log('PLAYER WON: ' + playerwon);
         }
 
         if (document.cookie.indexOf("playertied") >= 0) {
             playertied = getCookie("playertied");
             playertied = parseInt(playertied);
-            console.log(playertied);
+            console.log('PLAYER TIED: ' + playertied);
         }
 
         if (document.cookie.indexOf("playerlost") >= 0) {
             playerlost = getCookie("playerlost");
             playerlost = parseInt(playerlost);
-            console.log(playerlost);
+            console.log('PLAYERLOST: ' + playerlost);
+        }
+
+        if (document.cookie.indexOf("totalplays") >= 0) {
+            totalplays = getCookie("totalplays");
+            totalplays = parseInt(totalplays);
+            console.log('TOTAL: ' + totalplays);
         }
 
         switch (dif) {
@@ -61,11 +79,14 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
             case 0:
                 if(playertied != null) {
                     playertied++;
+                    totalplays++;
                 } else {
                     playertied = "1";
+                    totalplays++;
                 }
 
                 document.cookie = "playertied=" + playertied;
+                document.cookie = "totalplays=" + totalplays;
                 document.getElementById("tie").innerHTML = playertied;
                 break;
 
@@ -74,13 +95,16 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
                 if(playerwon != null && computerlost != null) {
                     playerwon++;
                     computerlost++;
+                    totalplays++;
                 } else {
                     playerwon = "1";
                     computerlost = "1";
+                    totalplays++;
                 }
 
                 document.cookie = "playerwon=" + playerwon;
                 document.cookie = "computerlost=" + computerlost;
+                document.cookie = "totalplays=" + totalplays;
 
                 document.getElementById("human").innerHTML = playerwon;
                 document.getElementById("comp").innerHTML = computerlost;
@@ -88,18 +112,19 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
 
             //Computer won
             case 2:
-                if(playerlost != null) {
+                if(playerlost != null && computerlost != null) {
                     playerlost++;
+                    computerlost--;
+                    totalplays++;
                 } else {
                     playerlost = "1";
+                    computerlost = "0";
                 }
-                document.cookie = "playerlost=" + playerlost;
+
+                document.cookie = "playerwon=" + playerwon;
+                document.cookie = "computerlost=" + computerlost;
+                document.cookie = "totalplays=" + totalplays;
                 break;
         }
 
-        //var cookie = document.cookie;
-        //var cstart = cookie.indexOf("playerwon=");
-        //console.log(getCookie());
-
-        //alert("Your Cookie : " + document.cookie);
     };
