@@ -33,6 +33,7 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
         }
 
         playerwon = null;
+        computerlost = null;
         playertied = null;
         playerlost = null;
 
@@ -55,6 +56,8 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
         }
 
         switch (dif) {
+
+            //Tied
             case 0:
                 if(playertied != null) {
                     playertied++;
@@ -63,17 +66,27 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
                 }
 
                 document.cookie = "playertied=" + playertied;
+                document.getElementById("tie").innerHTML = playertied;
                 break;
 
+            //Player won
             case 1:
-                if(playerwon != null) {
+                if(playerwon != null && computerlost != null) {
                     playerwon++;
+                    computerlost++;
                 } else {
                     playerwon = "1";
+                    computerlost = "1";
                 }
+
                 document.cookie = "playerwon=" + playerwon;
+                document.cookie = "computerlost=" + computerlost;
+
+                document.getElementById("human").innerHTML = playerwon;
+                document.getElementById("comp").innerHTML = computerlost;
                 break;
 
+            //Computer won
             case 2:
                 if(playerlost != null) {
                     playerlost++;
