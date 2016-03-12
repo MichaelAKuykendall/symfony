@@ -14,12 +14,17 @@ Rock, Paper, Scissors, Spock, Lizard
 
     <h1>CHOOSE... but choose wisely.</h1>
 
+    <h2>COMPUTER: </h2><h2 id="comp">0</h2>    <h2>PITIFUL HUMAN: </h2><h2 id="human">0</h2>  <h2>TIE: </h2><h2 id="tie">0</h2><br />
+
+    <h2>ROCK: </h2><h2 id="rockct">0</h2> <h2>PAPER: </h2><h2 id="paperct">0</h2>    <h2>SCISSORS: </h2><h2 id="scissct">0</h2>
+    <h2>SPOCK</h2><h2 id="spockct">0</h2>  <h2>LIZARD</h2><h2 id="lizardct">0</h2>
+
     <img class="choice" id="rock" src="{{ asset('images/rock.jpeg') }}" onclick="doIt('rock', randomChoice)">
     <img class="choice" id="paper" src="{{ asset('images/paper.jpeg') }}" onclick="doIt('paper', randomChoice)">
     <img class="choice" id="scissors" src="{{ asset('images/scissors.jpeg') }}" onclick="doIt('scissors', randomChoice)">
     <img class="choice" id="spock" src="{{ asset('images/spock.jpeg') }}" onclick="doIt('spock', randomChoice)">
     <img class="choice" id="lizard" src="{{ asset('images/lizard.jpeg') }}" onclick="doIt('lizard', randomChoice)">
 
-    <h2>COMPUTER: </h2><h2 id="comp">0</h2>    <h2>PITIFUL HUMAN: </h2><h2 id="human">0</h2>  <h2>TIE: </h2><h2 id="tie"></h2>
+
 
 {% endblock %}

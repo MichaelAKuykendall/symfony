@@ -35,3 +35,9 @@ img.winner {
         text-shadow: 1px 1px 1px red;
     }
 }
+
+h2{
+    color:gray;
+    display: inline-block;
+    margin-right:10px;
+}

@@ -1,10 +1,10 @@
 var options = ["paper", "rock", "lizard", "spock", "scissors"],
 
-    result = [" ties ", " beats ", " loses to "],
+result = [" ties ", " beats ", " loses to "],
 
-    i = Math.floor(Math.random() * 5),
+i = Math.floor(Math.random() * 5),
 
-    randomChoice = options[i],
+randomChoice = options[i],
 
     doIt = function (choice1, choice2) {
         var index1 = options.indexOf(choice1),
@@ -52,36 +52,91 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
             if (parts.length == 2) return parts.pop().split(";").shift();
         }
 
-
-        if (document.cookie.indexOf("playerwon") >= 0) {
-            playerwon = getCookie("playerwon");
-            playerwon = parseInt(playerwon);
-            console.log('PLAYER WON: ' + playerwon);
+        function checkCookie(name) {
+            if (document.cookie.indexOf(name) >= 0) {
+                name = getCookie(name);
+                return parseInt(name);
+            } else {
+                return 0;
+            }
         }
 
-        if (document.cookie.indexOf("playertied") >= 0) {
-            playertied = getCookie("playertied");
-            playertied = parseInt(playertied);
-            console.log('PLAYER TIED: ' + playertied);
+        playerwon = checkCookie("playerwon");
+        playertied = checkCookie("playertied");
+        computerwon = checkCookie("computerwon");
+        totalplays = checkCookie("totalplays");
+        rockct = checkCookie("rockct");
+        paperct = checkCookie("paperct");
+        scissct = checkCookie("scissct");
+        spockct = checkCookie("spockct");
+        lizardct = checkCookie("lizardct");
+
+        switch (choice1) {
+            case "rock":
+                rockct++;
+                break;
+
+            case "paper":
+                paperct++;
+                break;
+
+            case "scissors":
+                scissct++;
+                break;
+
+            case "spock":
+                spockct++;
+                break;
+
+            case "lizard":
+                lizardct;
+                break;
         }
 
-        if (document.cookie.indexOf("computerwon") >= 0) {
-            computerwon = getCookie("computerwon");
-            computerwon = parseInt(computerwon);
-            console.log('computerwon: ' + computerwon);
+        switch (choice2) {
+            case "rock":
+                rockct++;
+                break;
+
+            case "paper":
+                paperct++;
+                break;
+
+            case "scissors":
+                scissct++;
+                break;
+
+            case "spock":
+                spockct++;
+                break;
+
+            case "lizard":
+                lizardct;
+                break;
         }
 
-        if (document.cookie.indexOf("totalplays") >= 0) {
-            totalplays = getCookie("totalplays");
-            totalplays = parseInt(totalplays);
-            console.log('TOTAL: ' + totalplays);
-        }
+        document.cookie = "rockct=" + rockct;
+        document.getElementById("rockct").innerHTML = rockct;
+
+        document.cookie = "paperct=" + paperct;
+        document.getElementById("paperct").innerHTML = paperct;
+
+        document.cookie = "scissct=" + scissct;
+        document.getElementById("scissct").innerHTML = scissct;
+
+        document.cookie = "spockct=" + spockct;
+        document.getElementById("spockct").innerHTML = spockct;
+
+        document.cookie = "lizardct=" + lizardct;
+        document.getElementById("lizardct").innerHTML = lizardct;
+
+        document.cookie = "totalplays=" + totalplays;
 
         switch (dif) {
 
             //Tied
             case 0:
-                if(playertied != null) {
+                if (playertied != null) {
                     playertied++;
                     totalplays++;
                 } else {
@@ -96,7 +151,7 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
 
             //Player won
             case 1:
-                if(playerwon != null && computerwon != null) {
+                if (playerwon != null && computerwon != null) {
                     playerwon++;
                     computerwon != 0 ? computerwon-- : computerwon = 0;
                     totalplays++;
@@ -116,7 +171,7 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
 
             //Computer won
             case 2:
-                if(playerwon != null && computerwon != null) {
+                if (playerwon != null && computerwon != null) {
                     playerwon != 0 ? playerwon-- : playerwon = 0;
                     computerwon++;
                     totalplays++;
@@ -128,6 +183,8 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
                 document.cookie = "playerwon=" + playerwon;
                 document.cookie = "computerwon=" + computerwon;
                 document.cookie = "totalplays=" + totalplays;
+                document.getElementById("human").innerHTML = playerwon;
+                document.getElementById("comp").innerHTML = computerwon;
                 break;
         }
 
