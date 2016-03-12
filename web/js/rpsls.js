@@ -17,29 +17,33 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
             dif -= 2;
         }
 
-        setTimeout(function () {
-            if (newState == -1) {
-                var i = document.getElementById("choice");
-                i.classList.remove("winner");
-            }
-        }, 5000);
-
         //return choice1 + result[dif] + choice2;
 
-        document.getElementById(choice1).style.borderColor = "#FF0000";
-        document.getElementById(choice2).style.borderColor = "#FF0000";
+        //document.getElementById(choice1).style.borderColor = "#FF0000";
+        //document.getElementById(choice2).style.borderColor = "#FF0000";
 
-        var i = document.getElementById("choice");
+        var i = document.getElementById(choice1);
         i.classList.add("winner");
-        setTimeout();
+
+        var j = document.getElementById(choice2);
+        j.classList.add("winner");
+
+        setTimeout(function () {
+            var i = document.getElementById(choice1);
+            i.classList.remove("winner");
+
+            var j = document.getElementById(choice2);
+            j.classList.remove("winner");
+
+        }, 3000);
 
         //console.log(choice1 + result[dif] + choice2);
 
-        //alert(choice1 + result[dif] + choice2);
+        alert(choice1 + result[dif] + choice2);
 
         playerwon = null;
         playertied = null;
-        playerlost = null;
+        computerwon = null;
         totalplays = 0;
 
         function getCookie(name) {
@@ -61,10 +65,10 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
             console.log('PLAYER TIED: ' + playertied);
         }
 
-        if (document.cookie.indexOf("playerlost") >= 0) {
-            playerlost = getCookie("playerlost");
-            playerlost = parseInt(playerlost);
-            console.log('PLAYERLOST: ' + playerlost);
+        if (document.cookie.indexOf("computerwon") >= 0) {
+            computerwon = getCookie("computerwon");
+            computerwon = parseInt(computerwon);
+            console.log('computerwon: ' + computerwon);
         }
 
         if (document.cookie.indexOf("totalplays") >= 0) {
@@ -92,37 +96,37 @@ var options = ["paper", "rock", "lizard", "spock", "scissors"],
 
             //Player won
             case 1:
-                if(playerwon != null && computerlost != null) {
+                if(playerwon != null && computerwon != null) {
                     playerwon++;
-                    computerlost++;
+                    computerwon != 0 ? computerwon-- : computerwon = 0;
                     totalplays++;
                 } else {
                     playerwon = "1";
-                    computerlost = "1";
+                    computerwon = "0";
                     totalplays++;
                 }
 
                 document.cookie = "playerwon=" + playerwon;
-                document.cookie = "computerlost=" + computerlost;
+                document.cookie = "computerwon=" + computerwon;
                 document.cookie = "totalplays=" + totalplays;
 
                 document.getElementById("human").innerHTML = playerwon;
-                document.getElementById("comp").innerHTML = computerlost;
+                document.getElementById("comp").innerHTML = computerwon;
                 break;
 
             //Computer won
             case 2:
-                if(playerlost != null && computerlost != null) {
-                    playerlost++;
-                    computerlost--;
+                if(playerwon != null && computerwon != null) {
+                    playerwon != 0 ? playerwon-- : playerwon = 0;
+                    computerwon++;
                     totalplays++;
                 } else {
-                    playerlost = "1";
-                    computerlost = "0";
+                    computerwon = "1";
+                    playerwon = "0";
                 }
 
                 document.cookie = "playerwon=" + playerwon;
-                document.cookie = "computerlost=" + computerlost;
+                document.cookie = "computerwon=" + computerwon;
                 document.cookie = "totalplays=" + totalplays;
                 break;
         }

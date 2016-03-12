@@ -15,16 +15,15 @@ img.winner {
     -webkit-animation-duration: 1s;
     -moz-animation-name: slidein2;
     -webkit-animation-name: slidein2;
-    -moz-animation-iteration-count: 5;
-    -webkit-animation-iteration-count: 5;
+    -moz-animation-iteration-count: 3;
+    -webkit-animation-iteration-count: 3;
     -moz-animation-direction: alternate;
     -webkit-animation-direction: alternate;
-    border: 4px solid red;
+    border: 2px solid red;
 }
 
 @-moz-keyframes slidein2 {
     from {
-        margin-left:1%;
         border: 1px solid black;
         text-shadow: 1px 1px 1px red;
     }
@@ -32,7 +31,6 @@ img.winner {
 
 @-webkit-keyframes slidein2 {
     from {
-        margin-left:1%;
         border: 1px solid black;
         text-shadow: 1px 1px 1px red;
     }
